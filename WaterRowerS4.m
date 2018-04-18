@@ -12,12 +12,12 @@ classdef WaterRowerS4
         function obj = WaterRowerS4(ComPort,app)
             %WATERROWERS4 Construct an instance of WaterRowerS4
             %   Detailed explanation goes here
+            obj.UI = app;
             obj.USB = serial(ComPort,'BytesAvailableFcn',{@readdata,obj});
             obj.USB.Terminator = 'CR/LF';
            % obj.USB.BytesAvailableFcn = @obj.readdata,app;
             obj.USB.BytesAvailableFcnMode = 'terminator';
             obj.USB.Tag = 'WaterRower';
-            obj.UI = app;
         end
         function readdata(rower,event,obj)
             out = fscanf(obj.USB, '%s');
@@ -64,6 +64,17 @@ classdef WaterRowerS4
                 msgbox(err.message)
             end
             
+        end
+        function result = request(obj,reg,numregs)
+            switch numregss
+                case 1
+                    prefix = 'IRS';
+                case 2
+                    prefix = 'IRD';
+                case 3
+                    prefix = 'IRT';
+            end
+            result=fprintf(obj.USB,strcat(prefix,reg));
         end
         function result = shutdown(obj)
             fclose(obj.USB);
