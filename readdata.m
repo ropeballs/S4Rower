@@ -15,7 +15,7 @@ switch out(1)
         if out(2) == 'I'
             disp = 'PING';
         else
-            app.pulseCount = str2double(out(2:3));
+%            app.pulseCount = str2double(out(2:3));
         end
     case '_'
          disp = 'HW';
@@ -26,10 +26,10 @@ switch out(1)
         value = hex2dec(out(7:end));
 %         app.UI.message = out(4:6);
         switch message
-            case 'IRD1E1'
-                app.UI.minute = dec2hex(bitshift(value,-8));
-                app.UI.second = dec2hex(bitand(value,255));
-            case 'IRD055'
+            case '1E1'
+                app.UI.Label.Text = dec2hex(bitshift(value,-8));
+                app.UI.Label_5.Text = dec2hex(bitand(value,255));
+            case '055'
                 app.UI.setDistance(num2str(value));
         end
     otherwise

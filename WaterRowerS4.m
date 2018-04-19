@@ -19,39 +19,7 @@ classdef WaterRowerS4
             obj.USB.BytesAvailableFcnMode = 'terminator';
             obj.USB.Tag = 'WaterRower';
         end
-        function readdata(rower,event,obj)
-            out = fscanf(obj.USB, '%s');
-            switch out(1)
-                case 'S'
-                    switch out(2)
-                        case 'S'
-                            app.stroke = 'Start';
-                        case 'E'
-                            app.stroke = 'END';
-                        otherwise
-                    end
-                case 'P'
-                    if out(2) == 'I'
-                        disp = 'PING'
-                    else
-                        app.pulseCount = str2double(out(2:3));
-                    end
-                case '_'
-                     disp = 'HW'
-                case 'I'
-                    switch out(4:6)
-                        case hex2dec('057')
-                            disp = '057'
-                        case hex2dec('065')
-                        case hex2dec('060')
-                        otherwise
-                    end
-                    app.UI.Label_2.Text = hex2dec(out(7:end));
-                otherwise
-                    disp = out
-
-            end
-        end
+        
         function result = connect(obj)
             %CONNECT Summary of this method goes here
             %   Detailed explanation goes here
@@ -66,7 +34,7 @@ classdef WaterRowerS4
             
         end
         function result = request(obj,reg,numregs)
-            switch numregss
+            switch numregs
                 case 1
                     prefix = 'IRS';
                 case 2
@@ -74,7 +42,8 @@ classdef WaterRowerS4
                 case 3
                     prefix = 'IRT';
             end
-            result=fprintf(obj.USB,strcat(prefix,reg));
+            fprintf(obj.USB,strcat(prefix,reg));
+            result = 1;
         end
         function result = shutdown(obj)
             fclose(obj.USB);
