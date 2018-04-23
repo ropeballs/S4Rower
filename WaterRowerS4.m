@@ -5,6 +5,7 @@ classdef WaterRowerS4
     properties
         USB
         UI
+        started = 0;
         
     end
     

@@ -6,14 +6,22 @@ switch out(1)
     case 'S'
         switch out(2)
             case 'S'
-                app.stroke = 'Start';
+                try        
+                    app.UI.SetStrokesPerMin(60/toc);
+%                     app.UI.StrokesMinuteGauge.Value = 60/toc;
+%                     app.UI.StrokesMinuteGauge.Text = 60/toc;
+                catch
+                end
+                tic
+%                app.stroke = 'Start';
             case 'E'
-                app.stroke = 'END';
+%                app.stroke = 'END';
             otherwise
         end
     case 'P'
         if out(2) == 'I'
             disp = 'PING';
+         %   app.started = 0;
         else
 %            app.pulseCount = str2double(out(2:3));
         end
