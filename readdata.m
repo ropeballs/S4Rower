@@ -1,4 +1,4 @@
-function  readdata(rower,event,app)
+function  readdata(rower,~,app)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 out = fscanf(rower, '%s');
@@ -48,6 +48,8 @@ switch out(1)
                 app.UI.setDistance(num2str(value));
                 app.UI.logdistance(app.UI.indx) = roweddistance;
                 plot(app.UI.UIAxes,app.UI.logtime(1:app.UI.indx),app.UI.logdistance(1:app.UI.indx))
+            case '148'
+                app.UI.SetMeterPerMin = (value/10);
         end
             app.UI.nextmessage = app.UI.nextmessage +1;
             if app.UI.nextmessage > length(app.UI.messages)
