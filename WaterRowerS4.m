@@ -34,6 +34,10 @@ classdef WaterRowerS4
             end
             
         end
+        function result = reset(obj)
+            fprintf(obj.USB,'RESET');
+            result = 1;
+        end
         function result = request(obj,reg,numregs)
             switch numregs
                 case 1

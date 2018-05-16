@@ -49,7 +49,7 @@ switch out(1)
                 app.UI.logdistance(app.UI.indx) = roweddistance;
                 plot(app.UI.UIAxes,app.UI.logtime(1:app.UI.indx),app.UI.logdistance(1:app.UI.indx))
             case '148'
-                app.UI.SetMeterPerMin = (value/10);
+                app.UI.SetMeterPerMin(value/10);
         end
             app.UI.nextmessage = app.UI.nextmessage +1;
             if app.UI.nextmessage > length(app.UI.messages)
